@@ -15,16 +15,21 @@ import {
     Alert,
     Box,
     Tooltip,
+    useTheme,
+    useMediaQuery,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const TradeListingPage = () => {
     const [trades, setTrades] = useState([]);
     const navigate = useNavigate();
     const [snackbar, setSnackbar] = useState({ open: false, message: "", type: "success" });
     const [loading, setLoading] = useState(true);
+
+    const theme = useTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
     useEffect(() => {
         fetch("https://trade-cd4a.onrender.com/api/trade")
@@ -54,7 +59,7 @@ const TradeListingPage = () => {
     };
 
     const handleEditClick = (trade) => {
-        navigate(`/add-trade/${trade._id}`)
+        navigate(`/add-trade/${trade._id}`);
     };
 
     return (
@@ -62,37 +67,42 @@ const TradeListingPage = () => {
             <Typography variant="h4" component="h1" gutterBottom align="center">
                 Trade Listings
             </Typography>
+
             {loading ? (
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
                     <CircularProgress />
                 </Box>
             ) : (
-                <TableContainer component={Paper} elevation={3} sx={{ borderRadius: 2, mt: 3 }}>
+                <TableContainer
+                    component={Paper}
+                    elevation={3}
+                    sx={{ borderRadius: 2, mt: 3, overflowX: "auto" }}
+                >
                     <Table>
                         <TableHead>
                             <TableRow sx={{ backgroundColor: "#f5f5f5" }}>
-                                <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                                <TableCell align="center" sx={{ fontWeight: "bold", fontSize: isSmallScreen ? "0.875rem" : "1rem" }}>
                                     Buy Date
                                 </TableCell>
-                                <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                                <TableCell align="center" sx={{ fontWeight: "bold", fontSize: isSmallScreen ? "0.875rem" : "1rem" }}>
                                     Strategy
                                 </TableCell>
-                                <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                                <TableCell align="center" sx={{ fontWeight: "bold", fontSize: isSmallScreen ? "0.875rem" : "1rem" }}>
                                     Entry Price
                                 </TableCell>
-                                <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                                <TableCell align="center" sx={{ fontWeight: "bold", fontSize: isSmallScreen ? "0.875rem" : "1rem" }}>
                                     Stop Loss
                                 </TableCell>
-                                <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                                <TableCell align="center" sx={{ fontWeight: "bold", fontSize: isSmallScreen ? "0.875rem" : "1rem" }}>
                                     Target
                                 </TableCell>
-                                <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                                <TableCell align="center" sx={{ fontWeight: "bold", fontSize: isSmallScreen ? "0.875rem" : "1rem" }}>
                                     Profit/Loss
                                 </TableCell>
-                                <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                                <TableCell align="center" sx={{ fontWeight: "bold", fontSize: isSmallScreen ? "0.875rem" : "1rem" }}>
                                     Rating
                                 </TableCell>
-                                <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                                <TableCell align="center" sx={{ fontWeight: "bold", fontSize: isSmallScreen ? "0.875rem" : "1rem" }}>
                                     Actions
                                 </TableCell>
                             </TableRow>
@@ -110,8 +120,7 @@ const TradeListingPage = () => {
                                     <TableCell
                                         align="center"
                                         sx={{
-                                            color:
-                                                trade.profitOrLoss === "profit" ? "green" : "red",
+                                            color: trade.profitOrLoss === "profit" ? "green" : "red",
                                             fontWeight: "bold",
                                         }}
                                     >
@@ -120,18 +129,12 @@ const TradeListingPage = () => {
                                     <TableCell align="center">{trade.rating}/10</TableCell>
                                     <TableCell align="center">
                                         <Tooltip title="Edit Trade">
-                                            <IconButton
-                                                color="primary"
-                                                onClick={() => handleEditClick(trade)}
-                                            >
+                                            <IconButton color="primary" onClick={() => handleEditClick(trade)}>
                                                 <EditIcon />
                                             </IconButton>
                                         </Tooltip>
                                         <Tooltip title="Delete Trade">
-                                            <IconButton
-                                                color="secondary"
-                                                onClick={() => handleDelete(trade._id)}
-                                            >
+                                            <IconButton color="secondary" onClick={() => handleDelete(trade._id)}>
                                                 <DeleteIcon />
                                             </IconButton>
                                         </Tooltip>
