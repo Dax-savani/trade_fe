@@ -33,6 +33,7 @@ const TradeForm = () => {
         learningFromThis: "",
         mistake: "",
         rating: "",
+        stockType: "",
     });
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -42,8 +43,8 @@ const TradeForm = () => {
         if (!date) return "";
         const d = new Date(date);
         const year = d.getFullYear();
-        const month = String(d.getMonth() + 1).padStart(2, "0"); // Ensure 2 digits
-        const day = String(d.getDate()).padStart(2, "0"); // Ensure 2 digits
+        const month = String(d.getMonth() + 1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
         return `${year}-${month}-${day}`;
     };
     useEffect(() => {
@@ -76,6 +77,7 @@ const TradeForm = () => {
                         learningFromThis: data.learningFromThis || "",
                         mistake: data.mistake || "",
                         rating: data.rating || "",
+                        stockType: data. stockType || "",
                     });
                 })
                 .catch(() => setError(true))
@@ -187,7 +189,20 @@ const TradeForm = () => {
                                 onChange={handleChange}
                             />
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={4}>
+                            <TextField
+                                fullWidth
+                                name="stockType"
+                                label="Stock Type"
+                                select
+                                value={formData.stockType}
+                                onChange={handleChange}
+                            >
+                                <MenuItem value="Stock">Stock</MenuItem>
+                                <MenuItem value="Options">Options</MenuItem>
+                            </TextField>
+                        </Grid>
+                        <Grid item xs={12} sm={4}>
                             <TextField
                                 fullWidth
                                 name="targetRatio"
@@ -202,7 +217,7 @@ const TradeForm = () => {
                                 <MenuItem value="1:4">1:4</MenuItem>
                             </TextField>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={4}>
                             <TextField
                                 fullWidth
                                 name="quantity"

@@ -85,6 +85,9 @@ const TradeListingPage = () => {
                                     Buy Date
                                 </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: "bold", fontSize: isSmallScreen ? "0.875rem" : "1rem" }}>
+                                    Stock Type
+                                </TableCell>
+                                <TableCell align="center" sx={{ fontWeight: "bold", fontSize: isSmallScreen ? "0.875rem" : "1rem" }}>
                                     Strategy
                                 </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: "bold", fontSize: isSmallScreen ? "0.875rem" : "1rem" }}>
@@ -95,6 +98,9 @@ const TradeListingPage = () => {
                                 </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: "bold", fontSize: isSmallScreen ? "0.875rem" : "1rem" }}>
                                     Target
+                                </TableCell>
+                                <TableCell align="center" sx={{ fontWeight: "bold", fontSize: isSmallScreen ? "0.875rem" : "1rem" }}>
+                                    Profit/Loss Price
                                 </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: "bold", fontSize: isSmallScreen ? "0.875rem" : "1rem" }}>
                                     Profit/Loss
@@ -113,10 +119,12 @@ const TradeListingPage = () => {
                                     <TableCell align="center">
                                         {new Date(trade.buyDate).toLocaleDateString()}
                                     </TableCell>
+                                    <TableCell align="center">{trade.stockType}</TableCell>
                                     <TableCell align="center">{trade.strategy}</TableCell>
-                                    <TableCell align="center">${trade.entryPrice.toFixed(2)}</TableCell>
-                                    <TableCell align="center">${trade.stopLoss.toFixed(2)}</TableCell>
-                                    <TableCell align="center">${trade.target.toFixed(2)}</TableCell>
+                                    <TableCell align="center">₹{trade.entryPrice.toFixed(2)}</TableCell>
+                                    <TableCell align="center">₹{trade.stopLoss.toFixed(2)}</TableCell>
+                                    <TableCell align="center">₹{trade.target}</TableCell>
+                                    <TableCell align="center">₹{trade.profitLossPrice === 0 ? trade.profitLossPrice : 0}</TableCell>
                                     <TableCell
                                         align="center"
                                         sx={{
