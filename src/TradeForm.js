@@ -37,7 +37,14 @@ const TradeForm = () => {
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
-
+    const formatDate = (date) => {
+        if (!date) return "";
+        const d = new Date(date);
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, "0"); // Ensure 2 digits
+        const day = String(d.getDate()).padStart(2, "0"); // Ensure 2 digits
+        return `${year}-${month}-${day}`;
+    };
     useEffect(() => {
         if (id) {
             setLoading(true);
@@ -51,7 +58,7 @@ const TradeForm = () => {
                 .then((data) => {
                     setFormData({
                         ...formData,
-                        buyDate: new Date(data.buyDate) || "",
+                        buyDate: formatDate(data.buyDate) || "",
                         strategy: data.strategy || "",
                         entryPrice: data.entryPrice || "",
                         stopLoss: data.stopLoss || "",
