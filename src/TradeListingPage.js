@@ -124,7 +124,7 @@ const TradeListingPage = () => {
                                     <TableCell align="center">₹{trade.entryPrice.toFixed(2)}</TableCell>
                                     <TableCell align="center">₹{trade.stopLoss.toFixed(2)}</TableCell>
                                     <TableCell align="center">₹{trade.target}</TableCell>
-                                    <TableCell align="center">₹{trade.profitLossPrice === 0 ? trade.profitLossPrice : 0}</TableCell>
+                                    <TableCell align="center">₹{trade.profitLossPrice === null ?  0 : trade.profitLossPrice }</TableCell>
                                     <TableCell
                                         align="center"
                                         sx={{
